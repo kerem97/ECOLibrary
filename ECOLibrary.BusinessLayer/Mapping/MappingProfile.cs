@@ -35,6 +35,7 @@ namespace ECOLibrary.BusinessLayer.Mapping
             CreateMap<Employee, EmployeeListResponse>().ReverseMap();
             CreateMap<Employee, EmployeeCreateRequest>().ReverseMap();
             CreateMap<Employee, EmployeeUpdateRequest>().ReverseMap();
+            CreateMap<Employee, EmployeeWithLoanCountResponse>().ReverseMap();
 
             CreateMap<Loan, LoanByIdResponse>().ReverseMap();
             CreateMap<Loan, LoanListResponse>().ReverseMap();

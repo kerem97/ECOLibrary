@@ -1,0 +1,49 @@
+﻿@using ECOLibrary.DTOs.Loan.Requests
+@model LoanCreateRequest
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Kitap Ödünç Ver</h2>
+
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success text-center">@ViewBag.Message</div>
+    }
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger text-center">@ViewBag.Error</div>
+    }
+
+    <form asp-action="CreateLoan" method="post">
+
+        <div class="mb-3">
+            <label for="Barcode" class="form-label">Kitap Barkodu</label>
+            <input type="text" class="form-control" id="Barcode" name="Barcode" placeholder="Barkod Giriniz" required />
+            <div class="invalid-feedback">Lütfen barkod giriniz.</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="EmployeeId" class="form-label">Çalışan</label>
+            <select class="form-select" id="EmployeeId" name="EmployeeId" required>
+                <option selected disabled>Çalışan Seç</option>
+                @foreach (var employee in ViewBag.Employees)
+                {
+                    <option value="@employee.Id">@employee.Name @employee.Surname</option>
+                }
+            </select>
+            <div class="invalid-feedback">Lütfen çalışan seçiniz.</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="LoanDate" class="form-label">Ödünç Tarihi</label>
+            <input type="date" class="form-control" id="LoanDate" name="LoanDate" value="@Model.LoanDate.ToString("yyyy-MM-dd")" required />
+            <div class="invalid-feedback">Lütfen ödünç tarihini seçiniz.</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Ödünç Ver</button>
+    </form>
+</div>
+

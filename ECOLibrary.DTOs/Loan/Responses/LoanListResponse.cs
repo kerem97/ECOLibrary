@@ -9,6 +9,10 @@ namespace ECOLibrary.DTOs.Loan.Responses
 {
     public class LoanListResponse
     {
-        public List<LoanByIdResponse> Loans { get; set; }
+        public string LoanId { get; set; } 
+        public string BookName { get; set; } 
+        public string Barcode { get; set; } 
+        public string EmployeeName { get; set; } 
+        public DateTime LoanDate { get; set; }
     }
 }

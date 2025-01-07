@@ -12,6 +12,7 @@ namespace ECOLibrary.BusinessLayer.Services.UserService
         //Task<List<UserListResponse>> GetAllUsersAsync();
         //Task<UserByIdResponse> GetUserByIdAsync(string id);
         Task AddUserAsync(UserCreateRequest userDto);
+        Task<bool> ValidateUserAsync(string username, string password);
         Task UpdateUserAsync(UserUpdateRequest userDto);
         Task DeleteUserAsync(string id);
     }

@@ -19,6 +19,58 @@ namespace ECOLibrary.BusinessLayer.Concrete
             _loanRepository = loanRepository;
             _mapper = mapper;
         }
+        public async Task ReturnLoanAsync(string loanId)
+        {
+            if (string.IsNullOrEmpty(loanId))
+            {
+                throw new ArgumentException("Loan ID boş olamaz.");
+            }
+
+            await _loanRepository.ReturnLoanAsync(loanId);
+        }
+        public async Task<List<ReturnedLoanListResponse>> GetReturnedLoansAsync()
+        {
+            var loans = await _loanRepository.GetReturnedLoansAsync();
+
+            return loans.Select(loan => new ReturnedLoanListResponse
+            {
+                LoanId = loan.Id,
+                BookName = loan.BookCopy.Book.Name,
+                Barcode = loan.BookCopy.Barcode,
+                EmployeeName = $"{loan.Employee.Name} {loan.Employee.Surname}",
+                LoanDate = loan.LoanDate,
+                ReturnDate = loan.ReturnDate.Value
+            }).ToList();
+        }
+
+        public async Task<List<LoanListResponse>> GetActiveLoansAsync()
+        {
+            var loans = await _loanRepository.GetAllActiveLoansAsync();
+
+            return loans.Select(loan => new LoanListResponse
+            {
+                LoanId = loan.Id,
+                BookName = loan.BookCopy.Book.Name,
+                Barcode = loan.BookCopy.Barcode,
+                EmployeeName = $"{loan.Employee.Name} {loan.Employee.Surname}",
+                LoanDate = loan.LoanDate
+            }).ToList();
+        }
+        public async Task CreateLoanAsync(LoanCreateRequest request)
+        {
+            if (string.IsNullOrEmpty(request.Barcode))
+            {
+                throw new ArgumentException("Barkod bilgisi boş olamaz.");
+            }
+
+            if (string.IsNullOrEmpty(request.EmployeeId))
+            {
+                throw new ArgumentException("Çalışan bilgisi boş olamaz.");
+            }
+
+            await _loanRepository.CreateLoanAsync(request);
+        }
+
 
         public async Task<List<LoanListResponse>> GetAllLoansAsync()
         {

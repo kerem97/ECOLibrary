@@ -8,8 +8,8 @@ namespace ECOLibrary.DTOs.Loan.Requests
 {
     public class LoanCreateRequest
     {
-        public string BookId { get; set; }
         public string EmployeeId { get; set; }
+        public string Barcode { get; set; }
         public DateTime LoanDate { get; set; }
     }
 

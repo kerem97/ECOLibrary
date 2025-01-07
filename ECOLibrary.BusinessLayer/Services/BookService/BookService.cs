@@ -21,10 +21,24 @@ namespace ECOLibrary.BusinessLayer.Services.BookService
             _bookRepository = bookRepository;
             _mapper = mapper;
         }
-        public async Task AddBookAsync(BookCreateRequest bookDto)
+        public async Task<List<BookListResponse>> GetAllBooksWithCopiesAsync()
         {
-            var book = _mapper.Map<Book>(bookDto);
-            await _bookRepository.AddAsync(book);
+            var books = _bookRepository.GetAllBooksWithCopies();
+            var response = books.Select(book => new BookListResponse
+            {
+                Id = book.Id,
+                Name = book.Name,
+                Author = book.Author,
+                Barcode = string.Join(", ", book.Copies.Select(c => c.Barcode)),
+                StockCount = book.Copies.Count(c => c.IsAvailable),
+                IsAvailable = book.Copies.Any(c => c.IsAvailable)
+            }).ToList();
+
+            return response;
+        }
+        public async Task AddBookAsync(BookCreateRequest bookRequest)
+        {
+            await _bookRepository.AddOrUpdateBookWithCopyAsync(bookRequest.Name, bookRequest.Author, bookRequest.Barcode);
         }
 
         public async Task DeleteBookAsync(string id)
@@ -49,5 +63,7 @@ namespace ECOLibrary.BusinessLayer.Services.BookService
             var book = _mapper.Map<Book>(bookDto);
             await _bookRepository.UpdateAsync(book);
         }
+
+      
     }
 }

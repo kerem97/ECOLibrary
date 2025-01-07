@@ -18,6 +18,12 @@ namespace ECOLibrary.BusinessLayer.Concrete
             _userRepository = userRepository;
             _mapper = mapper;
         }
+        public async Task<bool> ValidateUserAsync(string username, string password)
+        {
+            var user = await _userRepository.GetAllAsync(); 
+            var existingUser = user.FirstOrDefault(u => u.Username == username && u.Password == password);
+            return existingUser != null; 
+        }
 
         //public async Task<List<UserListResponse>> GetAllUsersAsync()
         //{

@@ -12,6 +12,7 @@ namespace ECOLibrary.BusinessLayer.Services.BookService
     {
         Task<List<BookListResponse>> GetAllBooksAsync();
         Task<BookByIdResponse> GetBookByIdAsync(string id);
+        Task<List<BookListResponse>> GetAllBooksWithCopiesAsync();
         Task AddBookAsync(BookCreateRequest bookDto);
         Task UpdateBookAsync(BookUpdateRequest bookDto);
         Task DeleteBookAsync(string id);

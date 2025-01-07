@@ -1,0 +1,35 @@
+﻿@using ECOLibrary.DTOs.Loan.Responses
+@model List<ReturnedLoanListResponse>
+
+@{
+    ViewData["Title"] = "History";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Ödünç Alma Geçmişi</h2>
+    <table class="table table-striped table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Kitap Adı</th>
+                <th>Barkod</th>
+                <th>Çalışan</th>
+                <th>Ödünç Tarihi</th>
+                <th>Teslim Tarihi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var loan in Model)
+            {
+                <tr>
+                    <td>@loan.BookName</td>
+                    <td>@loan.Barcode</td>
+                    <td>@loan.EmployeeName</td>
+                    <td>@loan.LoanDate.ToString("yyyy-MM-dd")</td>
+                    <td>@loan.ReturnDate.ToString("yyyy-MM-dd")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

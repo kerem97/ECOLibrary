@@ -11,6 +11,10 @@ namespace ECOLibrary.BusinessLayer.Services.LoanService
     public interface ILoanService
     {
         Task<List<LoanListResponse>> GetAllLoansAsync();
+        Task<List<LoanListResponse>> GetActiveLoansAsync();
+        Task<List<ReturnedLoanListResponse>> GetReturnedLoansAsync();
+        Task ReturnLoanAsync(string loanId);
+        Task CreateLoanAsync(LoanCreateRequest request);
         Task<LoanByIdResponse> GetLoanByIdAsync(string id);
         Task AddLoanAsync(LoanCreateRequest loanDto);
         Task UpdateLoanAsync(LoanUpdateRequest loanDto);

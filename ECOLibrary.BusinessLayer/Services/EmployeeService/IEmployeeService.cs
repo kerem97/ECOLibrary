@@ -12,6 +12,8 @@ namespace ECOLibrary.BusinessLayer.Services.EmployeeService
     {
         Task<List<EmployeeListResponse>> GetAllEmployeesAsync();
         Task<EmployeeByIdResponse> GetEmployeeByIdAsync(string id);
+        Task SetEmployeeInactiveAsync(string id);
+        Task<List<EmployeeWithLoanCountResponse>> GetAllEmployeesWithLoanCountAsync();
         Task AddEmployeeAsync(EmployeeCreateRequest employeeDto);
         Task UpdateEmployeeAsync(EmployeeUpdateRequest employeeDto);
         Task DeleteEmployeeAsync(string id);

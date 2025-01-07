@@ -8,6 +8,11 @@ namespace ECOLibrary.DTOs.Book.Responses
 {
     public class BookListResponse
     {
-        public List<BookByIdResponse> Books { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Author { get; set; }
+        public string Barcode { get; set; }
+        public bool IsAvailable { get; set; } 
+        public int StockCount { get; set; }
     }
 }

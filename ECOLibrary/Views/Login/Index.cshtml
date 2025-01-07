@@ -1,0 +1,52 @@
+﻿@using ECOLibrary.DTOs.User.Requests
+@model UserLoginRequest
+@{
+    ViewData["Title"] = "Index";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Eco Kitaplık Giriş Paneli</title>
+    <link rel="stylesheet" href="~/Animated Login Form [CSS] 2.1/style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>Sisteme Giriş</header>
+        <form method="post">
+            <div class="input-field">
+                <input asp-for="Username" type="text" required>
+                <label>Kullanıcı Adı</label>
+            </div>
+            <div class="input-field">
+                <input asp-for="Password" class="pswrd" type="password" required>
+                <span class="show">Göster</span>
+                <label>Şifre</label>
+            </div>
+            <div class="button">
+                <div class="inner"></div>
+                <button>Giriş</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        var input = document.querySelector('.pswrd');
+        var show = document.querySelector('.show');
+        show.addEventListener('click', active);
+        function active() {
+            if (input.type === "password") {
+                input.type = "text";
+                show.style.color = "#1DA1F2";
+                show.textContent = "Gizle";
+            } else {
+                input.type = "password";
+                show.textContent = "Göster";
+                show.style.color = "#111";
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -20,6 +20,29 @@ namespace ECOLibrary.BusinessLayer.Concrete
             _mapper = mapper;
         }
 
+        public async Task SetEmployeeInactiveAsync(string id)
+        {
+            var employee = await _employeeRepository.GetByIdAsync(id);
+            if (employee == null)
+            {
+                throw new InvalidOperationException("Personel bulunamadı.");
+            }
+
+            if (!employee.Status)
+            {
+                throw new InvalidOperationException("Personel zaten pasif durumda.");
+            }
+
+            employee.Status = false; 
+            await _employeeRepository.UpdateAsync(employee);
+        }
+
+        public async Task<List<EmployeeWithLoanCountResponse>> GetAllEmployeesWithLoanCountAsync()
+        {
+            return await _employeeRepository.GetAllWithLoanCountAsync();
+
+        }
+
         public async Task<List<EmployeeListResponse>> GetAllEmployeesAsync()
         {
             var employees = await _employeeRepository.GetAllAsync();
@@ -34,7 +57,18 @@ namespace ECOLibrary.BusinessLayer.Concrete
 
         public async Task AddEmployeeAsync(EmployeeCreateRequest employeeDto)
         {
-            var employee = _mapper.Map<Employee>(employeeDto);
+            if (string.IsNullOrEmpty(employeeDto.Name) || string.IsNullOrEmpty(employeeDto.Surname))
+            {
+                throw new ArgumentException("Ad ve soyad alanları boş olamaz.");
+            }
+
+            var employee = new Employee
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = employeeDto.Name,
+                Surname = employeeDto.Surname
+            };
+
             await _employeeRepository.AddAsync(employee);
         }
 

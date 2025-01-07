@@ -1,0 +1,61 @@
+﻿@model ECOLibrary.DTOs.Book.Requests.BookCreateRequest
+
+@{
+    ViewData["Title"] = "AddBook";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Kitap Ekle</h2>
+
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success text-center">@ViewBag.Message</div>
+    }
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger text-center">@ViewBag.Error</div>
+    }
+
+    <form asp-action="AddBook" method="post" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <label for="Name" class="form-label">Kitap Adı</label>
+            <input type="text" class="form-control" asp-for="Name" value="@Model?.Name" required />
+            <div class="invalid-feedback">Lütfen kitap adını giriniz.</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="Author" class="form-label">Yazar</label>
+            <input type="text" class="form-control" asp-for="Author" value="@Model?.Author" required />
+            <div class="invalid-feedback">Lütfen yazar adını giriniz.</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="Barcode" class="form-label">Barkod</label>
+            <input type="text" class="form-control" asp-for="Barcode" value="@Model?.Barcode" required />
+            <div class="invalid-feedback">Lütfen barkod numarasını giriniz.</div>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Kitap Ekle</button>
+    </form>
+</div>
+
+<script>
+    (function () {
+        'use strict'
+
+        var forms = document.querySelectorAll('.needs-validation')
+
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
+

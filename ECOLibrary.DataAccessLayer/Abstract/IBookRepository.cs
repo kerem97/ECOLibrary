@@ -9,5 +9,10 @@ namespace ECOLibrary.DataAccessLayer.Abstract
 {
     public interface IBookRepository : IGenericRepository<Book>
     {
+        IEnumerable<Book> GetAllBooksWithCopies();
+        bool IsBookExists(string name, string author);
+        Task AddOrUpdateBookWithCopyAsync(string name, string author, string barcode);
+
+
     }
 }

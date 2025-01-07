@@ -1,0 +1,54 @@
+﻿@using ECOLibrary.DTOs.Book.Responses
+@model List<BookListResponse>
+@{
+    ViewData["Title"] = "Kitap Listesi";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Kitap Listesi</h2>
+    <div class="d-flex justify-content-end mb-3">
+        <a href="@Url.Action("AddBook", "Book")" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Yeni Kitap Ekle
+        </a>
+    </div>
+
+    <table class="table table-striped table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Kitap Adı</th>
+                <th>Yazar</th>
+                <th>Barkod</th>
+                <th>Stok</th>
+                <th>Durum</th>
+                <th>İşlem</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model)
+            {
+                <tr>
+                    <td>@book.Name</td>
+                    <td>@book.Author</td>
+                    <td>@book.Barcode</td>
+                    <td>@book.StockCount</td>
+                    <td>
+                        @if (book.IsAvailable)
+                        {
+                            <span class="badge bg-success">Mevcut</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">Ödünç Verildi</span>
+                        }
+                    </td>
+                    <td>
+                        <a href="@Url.Action("CreateLoan", "Loan", new { BookId = book.Id })"
+                           class="btn btn-primary btn-sm">
+                            Ödünç Ver
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

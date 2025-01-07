@@ -18,6 +18,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.18" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,7 +28,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <None Include="wwwroot\AdminLTE-4.0.0-beta3\.github\codeql\codeql-config.yml" />
+    <None Include="wwwroot\AdminLTE-4.0.0-beta3\.github\CONTRIBUTING.md" />
+    <None Include="wwwroot\AdminLTE-4.0.0-beta3\.github\dependabot.yml" />
+    <None Include="wwwroot\AdminLTE-4.0.0-beta3\.github\FUNDING.yml" />
+    <None Include="wwwroot\AdminLTE-4.0.0-beta3\.github\ISSUE_TEMPLATE\bug-report-for-adminlte-v3.1-x.md" />
+    <None Include="wwwroot\AdminLTE-4.0.0-beta3\.github\ISSUE_TEMPLATE\feature-request-for-adminlte-v4-x.md" />
+    <None Include="wwwroot\AdminLTE-4.0.0-beta3\.github\workflows\bundlewatch.yml" />
+    <None Include="wwwroot\AdminLTE-4.0.0-beta3\.github\workflows\codeql.yml" />
+    <None Include="wwwroot\AdminLTE-4.0.0-beta3\.github\workflows\docs.yml" />
+    <None Include="wwwroot\AdminLTE-4.0.0-beta3\.github\workflows\lint.yml" />
+    <None Include="wwwroot\AdminLTE-4.0.0-beta3\.github\workflows\node-sass.yml" />
+    <None Include="wwwroot\AdminLTE-4.0.0-beta3\.github\workflows\release.yml" />
   </ItemGroup>
 
 </Project>
